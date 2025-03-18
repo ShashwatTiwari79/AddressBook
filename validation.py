@@ -5,7 +5,7 @@ class ValidationError(Exception):
 
 def validate_data(data_dict):
     validated_data = {}  
-    errors = []  # New errors list for each validation call
+    errors = [] 
     
     for k, v in data_dict.items():
         if k.endswith("fname"):
