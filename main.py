@@ -12,7 +12,8 @@ if __name__ == "__main__":
         print("1. Add Contact")
         print("2. Display Contacts")
         print("3. Edit contact")
-        print("4. Exit")
+        print("4. Delete Contact")
+        print("5. Exit")
         choice = input("Enter your choice: ").strip()
         if choice == "1":
             try:
@@ -43,6 +44,9 @@ if __name__ == "__main__":
             search_name = input("\nEnter the Full Name of the contact to edit: ").strip().lower()
             address_book.edit_contact(search_name)
         elif choice == "4":
+            search_name = input("\nEnter the Full Name of the contact to delete: ").strip().lower()
+            address_book.delete_contact(search_name)
+        elif choice == "5":
             break
         else:
             print("\nInvalid Choice. Please try again.")

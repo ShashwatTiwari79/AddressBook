@@ -49,4 +49,12 @@ class AddressBook:
                 return
 
         print("\nContact not found.")
+    def delete_contact(self, full_name):
+        for phone, contact in self.contacts.items():
+            if f"{contact.fname} {contact.lname}".strip().lower() == full_name.lower():
+                del self.contacts[phone]
+                print("\nContact Deleted Successfully!")
+                return
+
+        print("\nContact not found.")
     
