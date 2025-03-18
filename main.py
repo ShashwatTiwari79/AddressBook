@@ -40,7 +40,7 @@ if __name__ == "__main__":
         elif choice == "2":
             address_book.print_address()
         elif choice == "3":
-            search_name = input("\nEnter the First Name of the contact to edit: ").strip().lower()
+            search_name = input("\nEnter the Full Name of the contact to edit: ").strip().lower()
             address_book.edit_contact(search_name)
         elif choice == "4":
             break
