@@ -1,3 +1,4 @@
+from collections import defaultdict
 from addressbook import AddressBook
 
 
@@ -50,3 +51,21 @@ class AddressBookMain:
                 print(f"contacts:- {contact}\n")
         else:
             print("\nNo contacts found in the specified location.")
+    def view_person_city_state(self):
+        city_loc = defaultdict(list)
+        state_loc = defaultdict(list)
+        for book_name,address_book in self.addressbook.items():
+            for contact in address_book.contacts.values():
+                city_loc[contact.city].append(f"[{book_name}]{contact.fname} {contact.lname} {contact.phonenum} {contact.email}")
+                state_loc[contact.state].append(f"[{book_name}]{contact.fname} {contact.lname} {contact.phonenum} {contact.email}")
+        print("\nContacts by City:")
+        for city, contacts in city_loc.items():
+            print(f"\nCity: {city}")
+            for contact in contacts:
+                print(contact)
+        print("\nContacts by State:")
+        for state, contacts in state_loc.items():
+            print(f"\nState: {state}")
+            for contact in contacts:
+                print(contact)
+        
