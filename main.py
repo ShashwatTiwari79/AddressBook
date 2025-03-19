@@ -61,7 +61,8 @@ def main():
         print("2. Select Address Books")
         print("3. Display Address Book")
         print("4. Delete Address Book")
-        print("5. Exit")
+        print("5. Search contact by city or state")
+        print("6. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -84,6 +85,9 @@ def main():
             Mainbook.delete_address_book(name)
 
         elif choice =="5":
+            location = input("Enter the city or state to be searched: ").strip()
+            Mainbook.search_person_city(location)
+        elif choice == "6":
             exit("\nExiting the program, Goodbye!!!.....")
 
 if __name__ == "__main__":

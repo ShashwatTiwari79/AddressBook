@@ -37,3 +37,16 @@ class AddressBookMain:
             print(f"\n'{name}' Address Book deleted successfully!")
         else:
             print(f"\n'{name}' Address Book not found!")
+    def search_person_city(self,location):
+        found_contacts = []
+        for book_name,address_book in self.addressbook.items():
+            for contact in address_book.contacts.values():
+                if contact.city.lower() == location.lower() or contact.state.lower() == location.lower():
+                    found_contacts.append((book_name,contact))
+        if found_contacts:
+            print(f"\nContacts found in Address Books:")
+            for book_name, contact in found_contacts:
+                print(f"\nAddress Book: {book_name}")
+                print(f"contacts:- {contact}\n")
+        else:
+            print("\nNo contacts found in the specified location.")
