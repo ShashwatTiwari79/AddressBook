@@ -67,7 +67,6 @@ def validation_wrapper(func):
             print("\nValidation Errors:")
             for error in errors:
                 print(" -", error)
-            print("\nContact NOT added due to validation errors.\n")
             return None 
         
         return func(validated_data)  

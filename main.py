@@ -3,8 +3,6 @@ from contacts import Contacts
 from addressbook import AddressBook
 import validation
 
-print("\nWelcome to Address Book Program!")
-
 def manage_contacts(book):
     
    

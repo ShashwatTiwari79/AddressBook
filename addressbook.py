@@ -5,11 +5,13 @@ class AddressBook:
         self.name = name
         self.contacts = {}
     def add_contact(self, contact_obj):
-        if contact_obj.phonenum in self.contacts:
-            print("\nContact with this phone number already exists!")
-        else:
-            self.contacts[contact_obj.phonenum] = contact_obj
-            print("\nContact Added Successfully!")
+        for existing_contact in self.contacts.values():
+            if (existing_contact.fname.lower() == contact_obj.fname.lower() and
+                existing_contact.lname.lower() == contact_obj.lname.lower()):
+                print("\nError: A contact with the same name already exists in this Address Book!")
+                return
+        self.contacts[contact_obj.phonenum] = contact_obj
+        print("\nContact Added Successfully!")
 
     def print_address(self):
         if not self.contacts:
