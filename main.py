@@ -1,12 +1,13 @@
+from address_book_main import AddressBookMain
 from contacts import Contacts
 from addressbook import AddressBook
 import validation
 
 print("\nWelcome to Address Book Program!")
 
-if __name__ == "__main__":
-    address_book = AddressBook()
+def manage_contacts(book):
     
+   
     while True:
         print("\n----Address Book Menu----")
         print("1. Add Contact")
@@ -35,20 +36,57 @@ if __name__ == "__main__":
 
             if validated_data:
                 contact = Contacts(**validated_data)
-                address_book.add_contact(contact)
+                book.add_contact(contact)
             else:
                 print("\n Contact not added due to errors. \n")
         elif choice == "2":
-            address_book.print_address()
+            book.print_address()
         elif choice == "3":
             search_name = input("\nEnter the Full Name of the contact to edit: ").strip().lower()
-            address_book.edit_contact(search_name)
+            book.edit_contact(search_name)
         elif choice == "4":
             search_name = input("\nEnter the Full Name of the contact to delete: ").strip().lower()
-            address_book.delete_contact(search_name)
+            book.delete_contact(search_name)
         elif choice == "5":
             break
         else:
             print("\nInvalid Choice. Please try again.")
             continue
+def main():
+    print("\nWelcome to the Address Book System!")
 
+    Mainbook = AddressBookMain()
+
+    while True:
+        print("\nOptions: ")
+        print("1. Create Address Book")
+        print("2. Select Address Books")
+        print("3. Display Address Book")
+        print("4. Delete Address Book")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ").strip()
+
+        if choice == "1":
+           name = input("Enter new Address Book name: ").strip()
+           Mainbook.add_address_book(name)
+
+        elif choice == "2":
+            name = input("Enter the  Address Book to select: ").strip()
+            book = Mainbook.select_address_book(name)
+
+            if book:
+                manage_contacts(book)
+
+        elif choice == "3":
+            Mainbook.display_address_books()
+
+        elif choice  == "4":
+            name = input("Enter the Address Book to delete: ").strip()
+            Mainbook.delete_address_book(name)
+
+        elif choice =="5":
+            exit("\nExiting the program, Goodbye!!!.....")
+
+if __name__ == "__main__":
+    main()

@@ -1,7 +1,8 @@
 from contacts import Contacts
 
 class AddressBook:
-    def __init__(self):
+    def __init__(self,name):
+        self.name = name
         self.contacts = {}
     def add_contact(self, contact_obj):
         if contact_obj.phonenum in self.contacts:
