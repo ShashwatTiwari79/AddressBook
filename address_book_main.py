@@ -51,21 +51,33 @@ class AddressBookMain:
                 print(f"contacts:- {contact}\n")
         else:
             print("\nNo contacts found in the specified location.")
-    def view_person_city_state(self):
+    def view_person_city_state(self,Type = True):
         city_loc = defaultdict(list)
         state_loc = defaultdict(list)
+        city_count = defaultdict(int)
+        state_count = defaultdict(int)
         for book_name,address_book in self.addressbook.items():
             for contact in address_book.contacts.values():
                 city_loc[contact.city].append(f"[{book_name}]{contact.fname} {contact.lname} {contact.phonenum} {contact.email}")
                 state_loc[contact.state].append(f"[{book_name}]{contact.fname} {contact.lname} {contact.phonenum} {contact.email}")
-        print("\nContacts by City:")
-        for city, contacts in city_loc.items():
-            print(f"\nCity: {city}")
-            for contact in contacts:
-                print(contact)
-        print("\nContacts by State:")
-        for state, contacts in state_loc.items():
-            print(f"\nState: {state}")
-            for contact in contacts:
-                print(contact)
+                city_count[contact.city] += 1
+                state_count[contact.state] += 1
+        if Type == True:
+            print("\nContacts by City:")
+            for city, contacts in city_loc.items():
+                print(f"\nCity: {city}")
+                for contact in contacts:
+                    print(contact)
+            print("\nContacts by State:")
+            for state, contacts in state_loc.items():
+                print(f"\nState: {state}")
+                for contact in contacts:
+                    print(contact)
+        else:
+            print("\nContacts by City:")
+            for city, count in city_count.items():
+                print(f"\nCity: {city} - {count} contacts")
+            print("\nContacts by State:")
+            for state, count in state_count.items():
+                print(f"\nState: {state} - {count} contacts")
         

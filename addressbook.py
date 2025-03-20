@@ -60,4 +60,9 @@ class AddressBook:
                 return
 
         print("\nContact not found.")
+    def sort_contacts(self):
+        sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.fname)
+        print("\nContacts sorted by First Name:")
+        for contact in sorted_contacts:
+            print(contact)
     

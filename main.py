@@ -12,7 +12,8 @@ def manage_contacts(book):
         print("2. Display Contacts")
         print("3. Edit contact")
         print("4. Delete Contact")
-        print("5. Exit")
+        print("5. Sorting by name")
+        print("6. Exit")
         choice = input("Enter your choice: ").strip()
         if choice == "1":
             try:
@@ -46,6 +47,8 @@ def manage_contacts(book):
             search_name = input("\nEnter the Full Name of the contact to delete: ").strip().lower()
             book.delete_contact(search_name)
         elif choice == "5":
+            book.sort_contacts()
+        elif choice == "6":
             break
         else:
             print("\nInvalid Choice. Please try again.")
@@ -63,7 +66,8 @@ def main():
         print("4. Delete Address Book")
         print("5. Search contact by city or state")
         print("6. View person by city or state")
-        print("7. Exit")
+        print("7. Count person by city or state")
+        print("8. Exit")
 
         choice = input("Enter your choice: ").strip()
 
@@ -91,6 +95,9 @@ def main():
         elif choice == "6":
             Mainbook.view_person_city_state()
         elif choice == "7":
-            exit("\nExiting the program, Goodbye!!!.....")
+            Mainbook.view_person_city_state(False)
+        elif choice == "8":
+            exit("\nExiting Address Book System.")
+        
 if __name__ == "__main__":
     main()
