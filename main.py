@@ -3,9 +3,9 @@ from contacts import Contacts
 from addressbook import AddressBook
 import validation
 
+
 def manage_contacts(book):
     
-   
     while True:
         print("\n----Address Book Menu----")
         print("1. Add Contact")
@@ -13,7 +13,7 @@ def manage_contacts(book):
         print("3. Edit contact")
         print("4. Delete Contact")
         print("5. Sorting by name")
-        print("6. Exit")
+       
         choice = input("Enter your choice: ").strip()
         if choice == "1":
             try:
@@ -49,6 +49,14 @@ def manage_contacts(book):
         elif choice == "5":
             book.sort_contacts()
         elif choice == "6":
+            print("\nSort by:")
+            print("1. City")
+            print("2. State")
+            print("3. Zip Code")
+            choice = input("Enter your choice: ").strip()
+            if choice in ["1", "2", "3"]:
+                book.sort_person_city_state_zip(int(choice))
+        elif choice == "7":
             break
         else:
             print("\nInvalid Choice. Please try again.")
@@ -97,7 +105,6 @@ def main():
         elif choice == "7":
             Mainbook.view_person_city_state(False)
         elif choice == "8":
-            exit("\nExiting Address Book System.")
-        
+            exit("\nExiting Address Book System.")        
 if __name__ == "__main__":
     main()

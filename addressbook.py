@@ -65,4 +65,15 @@ class AddressBook:
         print("\nContacts sorted by First Name:")
         for contact in sorted_contacts:
             print(contact)
-    
+    def sort_city_state_zip(self,choice):
+        if choice == 1:
+            sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.city)
+            print("\nContacts sorted by City:")
+        elif choice == 2:
+            sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.state)
+            print("\nContacts sorted by State:")
+        elif choice == 3:
+            sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.zip)
+            print("\nContacts sorted by Zip Code:")
+        for contact in sorted_contacts:
+            print(contact)
