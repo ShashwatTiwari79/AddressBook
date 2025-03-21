@@ -2,9 +2,12 @@ from address_book_main import AddressBookMain
 from contacts import Contacts
 from addressbook import AddressBook
 import validation
+import os
 
 
 def manage_contacts(book):
+    os.makedirs("data/csv", exist_ok=True)  
+    os.makedirs("data/json", exist_ok=True)  
     
     while True:
         print("\n----Address Book Menu----")

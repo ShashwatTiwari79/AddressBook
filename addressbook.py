@@ -1,26 +1,31 @@
 import os
 import csv
+import json
 from contacts import Contacts
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
 
 class AddressBook:
     def __init__(self,name):
         self.name = name
         self.contacts = {}
-        self.folder_path = f"data/csv/{self.name}"
-        self.filename = f"{self.folder_path}/{self.name}"
-        os.makedirs(self.folder_path, exist_ok=True)
+        self.csv_filename = os.getenv('CSV_PATH') +f"{self.name}.csv"  
+        self.json_filename = os.getenv('JSON_PATH') +f"{self.name}.json" 
         self.load_from_file()
+
         
     def save_to_file(self):
-        with open(f"{self.filename}.csv", "w", newline="") as file:
+        with open(self.csv_filename, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(["First Name", "Last Name", "Address", "City", "State", "Zip Code", "Phone Number", "Email"])
             for contact in self.contacts.values():
                 writer.writerow([contact.fname, contact.lname, contact.address, contact.city, contact.state, contact.zip, contact.phonenum, contact.email])
         print(f"\nAddress Book '{self.name}' saved to file successfully!")
+        self.save_to_json()
     def load_from_file(self):
         try:
-            with open(f"{self.filename}.csv", "r") as file:
+            with open(self.csv_filename, "r") as file:
                 reader = csv.reader(file)
                 next(reader)
                 for row in reader:
@@ -29,6 +34,24 @@ class AddressBook:
             print(f"\nAddress Book '{self.name}' loaded from file successfully!")
         except FileNotFoundError:
             print(f"\nError: Address Book '{self.name}' file not found")
+        self.load_from_json()
+    
+    def save_to_json(self):
+        with open(self.json_filename, "w") as json_file:
+            json.dump({phone: contact.__dict__ for phone, contact in self.contacts.items()}, json_file, indent=4)
+        print(f"\nAddress Book '{self.name}' saved to JSON file successfully!")
+
+    def load_from_json(self):
+        try:
+            with open(self.json_filename, "r") as json_file:
+                data = json.load(json_file)
+                for phone, contact_data in data.items():
+                    contact = Contacts(**contact_data)
+                    self.contacts[phone] = contact
+            print(f"\nAddress Book '{self.name}' loaded from JSON file successfully!")
+        except FileNotFoundError:
+            print(f"\nError: Address Book '{self.name}' JSON file not found")
+
     def add_contact(self, contact_obj):
         for existing_contact in self.contacts.values():
             if (existing_contact.fname.lower() == contact_obj.fname.lower() and
