@@ -4,6 +4,7 @@ class AddressBook:
     def __init__(self,name):
         self.name = name
         self.contacts = {}
+   
     def add_contact(self, contact_obj):
         for existing_contact in self.contacts.values():
             if (existing_contact.fname.lower() == contact_obj.fname.lower() and
@@ -12,6 +13,7 @@ class AddressBook:
                 return
         self.contacts[contact_obj.phonenum] = contact_obj
         print("\nContact Added Successfully!")
+        
 
     def print_address(self):
         if not self.contacts:
@@ -20,9 +22,8 @@ class AddressBook:
             print("\nAddress Book:")
             for contact in self.contacts.values():
                 print(contact)
-    def edit_contact(self,full_name):
-        
-        
+
+    def edit_contact(self,full_name):   
         for phone, contact in self.contacts.items():
             if f"{contact.fname} {contact.lname}".strip().lower() == full_name.lower():
                 print(f"\nEditing Contact: {contact}")
@@ -49,6 +50,7 @@ class AddressBook:
                 contact.email = new_email
 
                 print("\nContact updated successfully!")
+               
                 return
 
         print("\nContact not found.")
@@ -57,6 +59,7 @@ class AddressBook:
             if f"{contact.fname} {contact.lname}".strip().lower() == full_name.lower():
                 del self.contacts[phone]
                 print("\nContact Deleted Successfully!")
+                
                 return
 
         print("\nContact not found.")
@@ -65,4 +68,23 @@ class AddressBook:
         print("\nContacts sorted by First Name:")
         for contact in sorted_contacts:
             print(contact)
+    def sort_person_city_state_zip(self,choice):
+        if choice == 1:
+            sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.city)
+            print("\nContacts sorted by City:")
+            for contact in sorted_contacts:
+                print(contact)
+        elif choice == 2:
+            sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.state)
+            print("\nContacts sorted by State:")
+            for contact in sorted_contacts:
+                print(contact)
+        elif choice == 3:
+            sorted_contacts = sorted(self.contacts.values(), key=lambda x: x.zip)
+            print("\nContacts sorted by Zip Code:")
+            for contact in sorted_contacts:
+                print(contact)
+        else:
+            print("wrong choice")
+
     
